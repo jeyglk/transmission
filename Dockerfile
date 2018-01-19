@@ -17,6 +17,8 @@ RUN apk --no-cache add \
 		/transmission/config \
 	&& chmod 1777 /transmission
 
+COPY ./transmission.settings.json /transmission/config/settings.json
+
 ENV TRANSMISSION_HOME /transmission/config
 
 EXPOSE 9091

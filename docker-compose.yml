@@ -9,6 +9,7 @@ services:
     image: nginx
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx.htpasswd:/etc/nginx/conf.d/nginx.htpasswd:ro
     links:
       - app
     volumes_from:
@@ -16,13 +17,14 @@ services:
     environment:
       - VIRTUAL_HOST
     networks:
-    - back
-    - lb_web
+      - back
+      - lb_web
   app:
     build:
       context: .
     image: jeyglk/transmission
     volumes:
-      - ./data/downloads:/transmission/downloads
+      - ./data/download:/transmission/download
+      - ./data/incomplete:/transmission/incomplete
     networks:
-    - back
+      - back
